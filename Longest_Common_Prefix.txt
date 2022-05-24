@@ -1,0 +1,23 @@
+using System;
+
+public class Solution {
+    public static string LongestCommonPrefix(string[] strs) {
+        var word = strs[0];
+		for(int i=1; i<strs.Length; i++) {
+			while(strs[i].IndexOf(word) != 0) {
+				word = word.Substring(0,word.Length-1);
+			}
+		}
+		return word;
+    }
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		var arr = new string[3] {"flower","flowchwer","flightwer"};
+		var sol = Solution.LongestCommonPrefix(arr);
+		Console.WriteLine(sol);
+	}
+}
