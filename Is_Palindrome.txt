@@ -1,0 +1,47 @@
+Is Palindrome -1 (91ms)
+
+using System;
+
+public static class Solution {
+    public bool IsPalindrome(int x) {
+        string s = x.ToString();
+		for(int i=0, j=s.Length-1; i<j; i++, j--) if(s[i] != s[j]) return false;	
+		return true;
+    }
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		bool sol = Solution.IsPalindrome(-121);
+		Console.WriteLine(sol);
+	}
+}
+
+
+Is Palindrome -2  (43ms)
+
+using System;
+
+public class Solution {
+    public static bool IsPalindrome(int x) {
+        int a = x, b = 0;
+        while(a != 0) {
+            b = b*10 + a%10;
+            a = a/10;
+        }
+        if(b == x && x>0 || x == 0) return true;
+		else return false;
+    }
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		bool sol = Solution.IsPalindrome(-121);
+		Console.WriteLine(sol);
+	}
+}
+
