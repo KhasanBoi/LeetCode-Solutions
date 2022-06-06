@@ -1,0 +1,26 @@
+public class Solution {
+    public int[] PlusOne(int[] arr) {
+        if(arr[arr.Length-1] < 9) {
+			arr[arr.Length-1] +=1;
+			return arr;
+		} 
+		arr[arr.Length-1] += 1;
+		var sol = Helper(arr, arr.Length-1, 0);
+		if(sol[0] == 0) {
+			var ans = new int[arr.Length+1];
+			ans[0] = 1;
+			for(int i=1, j=0; i<ans.Length; i++, j++) ans[i] = sol[j];
+			return ans;
+		} else return sol;
+    }
+	public int[] Helper(int[] nums, int n, int rem) {
+		if(n < 0) return nums;
+		else {
+			nums[n] = nums[n] + rem;
+			int remainder = nums[n]/10;
+			nums[n] %= 10;
+			n--;
+			return Helper(nums, n, remainder);
+		}
+	}
+}
