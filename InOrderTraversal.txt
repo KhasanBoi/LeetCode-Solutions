@@ -1,0 +1,28 @@
+Binary Tree InOrder Traversal
+
+using recursion
+
+public void Recursion(TreeNode head) {
+    if(head != null) {
+        Recursion(head.left);
+        Console.WriteLine(head.val);
+        Recursion(head.right);
+    }
+}
+
+
+using stack
+
+public void StackInOrder(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<TreeNode>();
+    TreeNode curr = root;
+    while(curr != null || stack.Count != 0) {
+        while(curr != null) {
+            stack.Push(curr);
+            curr = curr.left;
+        }
+        curr = stack.Pop();
+        Console.WriteLine(cur.val);
+        curr = curr.right;
+    }
+}
