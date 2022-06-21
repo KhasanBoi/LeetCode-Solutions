@@ -1,0 +1,33 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine("***Transpose of a matrix in place***");
+		Console.WriteLine("====================================");
+		var matrix = new int[3][];
+		matrix[0] = new int[3];
+		matrix[1] = new int[3];
+		matrix[2] = new int[3];
+		int a = 1;
+		for(int i=0; i<matrix.Length; i++) {
+			for(int j=0; j<matrix[0].Length; j++) {
+				matrix[i][j] = a;
+				Console.Write(matrix[i][j]+" ");
+				a++;
+			}
+			Console.WriteLine();
+		}
+		Console.WriteLine();
+		for(int i=0; i<matrix.Length; i++) {
+			for(int j=0; j<matrix[0].Length; j++) {
+				int temp = matrix[i][j];
+				matrix[i][j] = matrix[j][i];
+				matrix[j][i] = temp;
+				Console.Write(matrix[i][j]+" ");
+			}
+			Console.WriteLine();
+		}
+	}
+}
