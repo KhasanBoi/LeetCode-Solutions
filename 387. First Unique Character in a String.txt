@@ -1,0 +1,18 @@
+public class Solution {
+    public int FirstUniqChar(string s) {
+        var set1 = new HashSet<char>();
+		char c = '/';
+		for(int i=0; i<s.Length; i++) {
+			if(!set1.Contains(s[i])) {
+				c = s[i];
+				set1.Add(s[i]);
+			}
+			else continue;
+
+			var str = s.Substring(i+1);
+			int x = str.IndexOf(c);
+			if(x < 0) return i;
+		}
+		return -1;
+    }
+}
