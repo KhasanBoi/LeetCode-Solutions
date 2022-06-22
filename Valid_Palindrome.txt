@@ -1,0 +1,18 @@
+public class Solution {
+    public bool IsPalindrome(string s) {
+        if(s == " ") return true;
+        for(int i=0, j=s.Length-1; i<j; i++) {
+            if(Char.IsLetterOrDigit(s[i]) && Char.IsLetterOrDigit(s[j])) {
+				char c1 = Char.ToLower(s[i]), c2 = Char.ToLower(s[j]);
+				if(c1 != c2) return false;
+				j--;
+			}
+			else if(!Char.IsLetterOrDigit(s[i])) continue;
+			else if(!Char.IsLetterOrDigit(s[j])) {
+				i--;
+				j--;
+			}
+        }
+        return true;
+    }
+}
