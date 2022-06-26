@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+
+public class TreeNode {
+     public int val;
+     public TreeNode left;
+     public TreeNode right;
+     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+		 this.val = val;
+         this.left = left;
+         this.right = right;
+	 }
+}
+
+public class Solution {
+    public static IList<IList<int>> LevelOrder(TreeNode root) {
+        var list = new List<IList<int>>();
+        if(root == null) return list;
+        
+        var que = new Queue<TreeNode>();
+        que.Enqueue(root);
+        
+        while(que.Count != 0) {
+            var lev = new List<int>();
+			int x = que.Count;
+            for(int i=0; i<x; i++) {
+                var node = que.Dequeue();
+                lev.Add(node.val);
+                if(node.left != null) que.Enqueue(node.left);
+                if(node.right != null) que.Enqueue(node.right);
+            }
+            if(lev.Count != 0) list.Add(lev);
+        }
+        return list;
+    }
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		var root = new TreeNode(1);
+		root.left = new TreeNode(2);
+		root.right = new TreeNode(3);
+		root.left.left = new TreeNode(4);
+		root.right.right = new TreeNode(5);
+		root.left.left.left = new TreeNode(6);
+		root.left.left.right = new TreeNode(7);
+		root.right.right.right = new TreeNode(9);
+		root.right.right.left = new TreeNode(8);
+		var list = Solution.LevelOrder(root);
+		for(int i=0; i<list.Count; i++) {
+			foreach(var n in list[i]) Console.Write(n+" ");
+			Console.WriteLine();
+		}
+	}
+}
