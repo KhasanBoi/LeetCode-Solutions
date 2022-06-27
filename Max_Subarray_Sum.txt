@@ -1,0 +1,78 @@
+<<FIRST O(N) APPROACH USING MAX_SUM, MIN_SUM AND SUM VARIABLES>>
+
+public class Solution {
+    public int MaxSubArray(int[] nums) {
+        if(nums == null || nums.Length == 0) return 0;
+		int max_sum = nums[0];
+        int sum = 0;
+        int min_sum = 0;
+        foreach(var num in nums) {
+            sum += num;
+            max_sum = Math.Max(max_sum, sum-min_sum);
+            min_sum = Math.Min(min_sum, sum);
+        }
+        return max_sum;
+    }
+}
+
+<<KADANE'S ALGORITHM USING MAX_END_HERE AND MAX_SO_FAR VARIABLES>>
+
+public class Solution {
+    public int MaxSubArray(int[] nums) {
+        if(nums == null || nums.Length == 0) return 0;
+		int max_so_far = int.MinValue;
+        int max_end_here = 0;
+        
+        for(int i=0; i<nums.Length; i++) {
+            max_end_here = max_end_here+nums[i];
+            if(max_end_here > max_so_far) max_so_far = max_end_here;
+            if(max_end_here < 0) max_end_here = 0;
+        }
+        return max_so_far;
+    }
+}
+
+
+<<MOHIT KUMAR with 202ms>>
+public class Solution {
+    public int MaxSubArray(int[] nums) {
+        if(nums == null || nums.Length == 0) return 0;
+		int curr_max = nums[0];
+        int max_so_far = nums[0];
+        for(int i=1; i<nums.Length; i++) {
+            curr_max = Math.Max(nums[i], curr_max+nums[i]);
+            max_so_far = Math.Max(max_so_far, curr_max);
+        }
+        return max_so_far;
+    }
+}
+
+<<DIVIDE AND CONQUER METHOD>>
+
+public class Solution {
+    public int MaxSubArray(int[] nums) {
+        if(nums == null || nums.Length == 0) return 0;
+		if(nums.Length < 2) return nums[0];
+		return Helper(nums, 0, nums.Length-1);
+    }
+    public int Helper(int[] nums, int l, int r) {
+        if(l > r) return int.MinValue;
+		int	mid = (l+r) >> 1;
+		int left = Helper(nums, l, mid-1);
+		int right = Helper(nums, mid+1, r);
+		int leftMaxSum = 0;
+		int sum = 0;
+		for (int i = mid - 1; i >= l; i--) {
+        	sum += nums[i];
+        	leftMaxSum = Math.Max(leftMaxSum, sum);
+      	}
+      	int rightMaxSum = 0;
+      	sum = 0;
+		for (int i = mid + 1; i <= r; i++) {
+        	sum += nums[i];
+        	rightMaxSum = Math.Max(sum, rightMaxSum);
+      	}
+      	// max(left, right, crossSum)
+      	return Math.Max(leftMaxSum + rightMaxSum + nums[mid], Math.Max(left, right));
+    }
+}
