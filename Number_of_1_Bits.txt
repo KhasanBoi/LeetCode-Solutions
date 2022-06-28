@@ -1,0 +1,61 @@
+<<Number of 1 Bits in a Number>>
+
+
+  ================================
+ ||***First Solution (with 36ms)***||
+  ================================
+
+public class Solution {
+    public int HammingWeight(uint n) {
+        uint count = 0;
+        while(n >= 1) {
+            count += n%2;
+            n/=2;
+        }
+        return (int)count;
+    }
+}
+
+ ===============================================================================
+|| ***Second Solution (with 37ms, but this one is Brute Force and quite dumb way!)***||
+ ===============================================================================
+
+public class Solution {
+    public int HammingWeight(uint n) {
+        if(n == 0) return 0;
+        var str = Convert.ToString(n,2);
+        int count = 0;
+        foreach(var c in str) if(c == '1') count++;
+        return count;
+    }
+}
+
+ ======================================================
+|| ***Previous Solution updated with n=n/2 => n = n>>1 (25ms)***||
+ ======================================================
+
+public class Solution {
+    public int HammingWeight(uint n) {
+        uint count = 0;
+        while(n >= 1) {
+            count += n%2;
+            n = n>>1;
+        }
+        return (int)count;
+    }
+}
+
+ ===========================================
+||***Forth Solution using Bit Manipulation***||
+ ===========================================
+
+public class Solution {
+    public int HammingWeight(uint n) {
+        int res = 0;
+        while(n > 0) {
+            n = n & (n-1);
+            res+=1;
+        }
+        return res;
+    }
+}
