@@ -1,0 +1,12 @@
+public class Solution {
+    public uint reverseBits(uint n) {
+        uint res = 0;
+        for(var i = 0; i < 32; i++) {
+            res = res << 1;
+            if(n % 2 == 1) res++;
+            n = n >> 1;
+        }
+        return res;
+    }
+}
+//https://www.youtube.com/watch?v=KE5Axm7uzok
