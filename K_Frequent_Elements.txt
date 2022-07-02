@@ -1,0 +1,22 @@
+public class Solution {
+    public int[] TopKFrequent(int[] nums, int k) {
+        if(nums.Length == 1) return nums;
+        Array.Sort(nums);
+        int count = 1;
+        var que = new PriorityQueue<int,int>();
+        for(int i=1; i<nums.Length; i++) {
+            if(nums[i] != nums[i-1]) {
+                que.Enqueue(nums[i-1], count);
+                count = 1;
+            } else count++;
+        }
+        que.Enqueue(nums[nums.Length-1],count);
+		var arr = new int[k];
+		while(que.Count != k) que.Dequeue();
+		while(k-1>=0) {
+			arr[k-1] = que.Dequeue();
+			k--;
+		}
+ 		return arr;
+    }
+}

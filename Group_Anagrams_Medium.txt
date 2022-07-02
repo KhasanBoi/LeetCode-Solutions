@@ -1,0 +1,22 @@
+public class Solution {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+        var list = new List<IList<string>>();
+        var map = new Dictionary<String,List<String>>();
+        for(int i=0; i<strs.Length; i++) {
+            var getId = sortChars(strs[i]);
+            if(map.TryGetValue(getId, out var value)) {
+                List<string> subList = value;
+                map[getId].Add(strs[i]);
+            } else {
+                map.Add(getId, new List<string> {strs[i]});
+            }
+        }
+        foreach(var item in map) list.Add(item.Value);
+        return list;
+    }
+    public string sortChars(string str) {
+        char[] c = str.ToCharArray();
+        Array.Sort(c);
+        return new string(c);
+    }
+}
