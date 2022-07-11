@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+    public static int CarFleet(int target, int[] pos, int[] speed) {
+		var stack = new Stack<double>();
+		int[][] ps = new int[pos.Length][];
+		for(int i=0; i<pos.Length; i++) {
+			ps[i] = new int[2];
+			ps[i][0] = pos[i];
+			ps[i][1] = speed[i];
+		}
+		Array.Sort(ps, (x,y) => x[0].CompareTo(y[0]));
+		for(int i=ps.Length-1; i>=0; i--) {
+			double currentTime = (double)(target-ps[i][0])/ps[i][1];
+			Console.WriteLine(ps[i][0]+" and "+ps[i][1]+" and time="+currentTime);
+			if(stack.Count != 0 && currentTime <= stack.Peek()) continue;
+			else stack.Push(currentTime);
+		}
+		return stack.Count;
+	}
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		var position = new int[2] {6,8};
+		var speed = new int[2] {3,2};
+		var target = 10;
+		Solution.CarFleet(target, position, speed);
+	}
+}
