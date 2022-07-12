@@ -1,0 +1,15 @@
+public class Solution {
+    public IList<string> GenerateParenthesis(int n) {
+        var list = new List<string>();
+        backtrack(0,0,list,n,string.Empty);
+        return list;
+    }
+    public void backtrack(int openN, int closeN, IList<string> list, int n, string str) {
+        if(str.Length == n*2) {
+            list.Add(str);
+            return;
+        }
+        if(openN < n) backtrack(openN+1, closeN, list, n, str+"(");
+        if(closeN < openN) backtrack(openN, closeN+1, list, n, str+")");
+    }
+}
