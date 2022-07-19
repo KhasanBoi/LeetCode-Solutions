@@ -1,0 +1,18 @@
+public class Solution {
+    public int[] FindErrorNums(int[] nums) {
+        var map = new Dictionary<int,int>();
+        int dup = -1;
+        int sum = 0;
+        for(int i=1, j=0; i<=nums.Length; i++, j++) {
+            sum += i;
+            if(!map.ContainsKey(nums[j])) {
+                map.Add(nums[j], 1);
+            } else map[nums[j]] += 1;
+        }
+        foreach(var item in map) {
+            if(item.Value == 2) dup = item.Key;
+            sum -= item.Key;
+        }
+        return new int[2] {dup, sum};
+    }
+}
