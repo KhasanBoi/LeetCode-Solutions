@@ -1,0 +1,11 @@
+public class Solution {
+    public int FindPoisonedDuration(int[] t, int delay) {
+        int sum = delay;
+        for(int i=t.Length-2; i>=0; i--) {
+            int time = t[i]+delay-1;
+            if(time >= t[i+1]) sum += (delay-(time-t[i+1]+1));
+            else sum += delay;
+        }
+        return sum;
+    }
+}

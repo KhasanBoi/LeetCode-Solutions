@@ -1,0 +1,6 @@
+public class Solution {
+    public int FindComplement(int num) {
+        int bits = (int)Math.Floor(Math.Log2(num))+1;
+        return ((1<<bits) - 1) ^ num;
+    }
+}

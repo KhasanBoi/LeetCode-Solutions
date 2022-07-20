@@ -1,0 +1,28 @@
+// USING FOR LOOP
+
+public class Solution {
+    public int FindMaxConsecutiveOnes(int[] nums) {
+        int count =0, max=int.MinValue;
+        for(int i=0; i<nums.Length; i++) {
+            if(nums[i] == 1) count = count +1;
+            if(count > max) max = count;
+            if(nums[i] == 0) count =0;
+        }
+        return max;
+    }
+}
+
+// USING STACK
+
+public class Solution {
+    public int FindMaxConsecutiveOnes(int[] nums) {
+        int count = 0;
+		var stack = new Stack<int>();
+		for(int i=0; i<nums.Length; i++) {
+			if(stack.Count != 0 && nums[i] == 0) stack = new Stack<int>();
+			else if(nums[i] == 1) stack.Push(1);
+			count = Math.Max(stack.Count, count);
+		}
+        return count;
+    }
+} 

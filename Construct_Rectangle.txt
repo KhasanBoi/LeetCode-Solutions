@@ -1,0 +1,8 @@
+public class Solution {
+    public int[] ConstructRectangle(int area) {
+        double b = Math.Floor(Math.Sqrt(area));
+		double a = area/b;
+		while(area/b - (Math.Floor(area/b)) != 0 && b>0) b--;	
+		return new int[2] {(int)(area/b),(int)b};
+    }
+}
