@@ -1,0 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    private int min = int.MaxValue;
+    private TreeNode pre;
+    
+    public int GetMinimumDifference(TreeNode root) {
+        pre = null;
+        inorder(root);
+        return min;
+    }
+    public void inorder(TreeNode root){
+        if(root==null) return;
+        inorder(root.left);
+        if(pre != null) min = Math.Min(Math.Abs(pre.val-root.val), min);
+        Console.Write(min+" ");
+        pre = root;
+        inorder(root.right);
+    }
+}
