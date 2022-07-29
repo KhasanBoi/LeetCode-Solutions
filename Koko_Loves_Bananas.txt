@@ -1,0 +1,16 @@
+public class Solution {
+    public int MinEatingSpeed(int[] piles, int h) {
+        int left = 1, right = 1;
+        foreach(var pile in piles) right = Math.Max(right, pile);
+        while(left < right) {
+            int mid = (left+right)/2;
+            int hoursSpent = 0;
+            foreach(var pile in piles) {
+                hoursSpent += (int)Math.Ceiling((double)pile/mid);
+            }
+            if(hoursSpent <= h) right = mid;
+            else left = mid+1;
+        }
+        return right;
+    }
+}
